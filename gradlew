@@ -58,6 +58,7 @@ die () {
     echo "$*"
     echo
     exit 1
+
 }
 
 # OS specific support (must be 'true' or 'false').
