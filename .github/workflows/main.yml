@@ -39,6 +39,8 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
+      - name : Grant Permission
+        run : chmod +x gradlew
       - name: Run Debug Tests
         run: ./gradlew testDebugUnitTest --continue
 
@@ -56,6 +58,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+        
+      - name : Grant Permission
+        run : chmod +x gradlew
         
       - name: Run ktlint check
         run: ./gradlew ktlintCheck --continue
@@ -86,6 +91,9 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
+            
+      - name : Grant Permission
+        run : chmod +x gradlew
       - name: Run Debug Lint
         run: ./gradlew lintDebug
 
@@ -114,6 +122,9 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
+            
+      - name : Grant Permission
+        run : chmod +x gradlew
       - name: Assemble Debug
         run: ./gradlew assembleDebug
 
