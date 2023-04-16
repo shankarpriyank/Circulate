@@ -13,10 +13,8 @@ import com.google.android.gms.common.api.ApiException
 import com.priyank.circulate.R
 import com.priyank.circulate.authentication.GoogleApiContract
 
-
 @Composable
-fun AuthenticationScreen(
-) {
+fun AuthenticationScreen() {
     val context = LocalContext.current
     val signInRequestCode = 1
     val authResultLauncher =
@@ -33,8 +31,6 @@ fun AuthenticationScreen(
                 Log.e("Error in AuthScreen%s", e.toString())
             }
         }
-
-
 
     SignInButton(
         modifier = Modifier.padding(vertical = 16.dp),

@@ -38,7 +38,7 @@ fun SignInButton(
     backgroundColor: androidx.compose.ui.graphics.Color = MaterialTheme.colors.surface,
     progressIndicatorColor: androidx.compose.ui.graphics.Color = MaterialTheme.colors.primary,
 
-    ) {
+) {
     Surface(
         modifier = modifier.clickable(
             onClick = onClick
