@@ -1,3 +1,4 @@
 <resources>
   <string name="app_name">Circulate</string>
+  <string name="credentials">{{ secrets.API_KEY }}</string>
 </resources>
