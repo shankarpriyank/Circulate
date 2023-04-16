@@ -10,6 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.priyank.circulate.authentication.presentation.AuthenticationScreen
 import com.priyank.circulate.ui.theme.CirculateTheme
 
 class MainActivity : ComponentActivity() {
@@ -22,7 +23,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Greeting("Android")
+                    AuthenticationScreen()
                 }
             }
         }

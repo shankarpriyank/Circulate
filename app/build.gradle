@@ -2,7 +2,6 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'org.jlleitschuh.gradle.ktlint'
-
 }
 
 android {
@@ -62,6 +61,13 @@ dependencies {
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_ui_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
+
+    //Authentication
+    implementation 'com.google.android.gms:play-services-auth:20.5.0'
+    implementation('com.google.api-client:google-api-client-android:1.30.9') {
+        exclude group: 'org.apache.httpcomponents'
+    }
+
 }
 
 
