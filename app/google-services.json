@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1084931956777",
+    "firebase_url": "https://circulate-bb3b7-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "circulate-bb3b7",
+    "storage_bucket": "circulate-bb3b7.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1084931956777:android:9f81ca0b6b469bffaabc38",
+        "android_client_info": {
+          "package_name": "com.priyank.circulate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1084931956777-rbhhre9fh2g043vj3bnakm0tetk9aevv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.priyank.circulate",
+            "certificate_hash": "aaec8e26a514ada95aed7d35066b9b0a55b657bc"
+          }
+        },
+        {
+          "client_id": "1084931956777-ksgprd0suck1gpruprter8js2u1hm70g.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAOjsRshQ60lVFTzP8bwn9-93eFMoNo8BU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1084931956777-ksgprd0suck1gpruprter8js2u1hm70g.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
