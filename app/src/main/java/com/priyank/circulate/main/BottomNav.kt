@@ -1,5 +1,7 @@
 package com.priyank.circulate.main
 
+import android.content.ContentValues.TAG
+import android.util.Log
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.BadgedBox
 import androidx.compose.material.BottomNavigation
@@ -21,6 +23,9 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
+import com.priyank.circulate.ui.theme.PrimaryOrange
 
 @Composable
 fun BottomNavigationBar(
@@ -41,7 +46,7 @@ fun BottomNavigationBar(
             BottomNavigationItem(
                 selected = selected,
                 onClick = { onItemClick(item) },
-                selectedContentColor = Blue,
+                selectedContentColor = PrimaryOrange,
                 unselectedContentColor = Black,
                 icon = {
                     Column(horizontalAlignment = CenterHorizontally) {
@@ -93,7 +98,33 @@ fun Navigation(navController: NavHostController, navControllerforSigningOut: Nav
 
 @Composable
 fun Test(ss: String) {
-    Button(onClick = { /*TODO*/ }) {
+    Button(onClick = { testDb() }) {
         Text(text = ss)
     }
+}
+
+fun testDb()
+{
+    // Write a message to the database
+    val database = Firebase.firestore
+    val myRef = database.collection("test")
+
+    for (i in 0 until 100){
+        val user = hashMapOf(
+            "first" to "Ada",
+            "last" to "Lovelace",
+            "born" to i
+        )
+
+// Add a new document with a generated ID
+        myRef
+            .add(user)
+            .addOnSuccessListener { documentReference ->
+                Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+            }
+            .addOnFailureListener { e ->
+                Log.w(TAG, "Error adding document", e)
+            }
+
+}
 }
