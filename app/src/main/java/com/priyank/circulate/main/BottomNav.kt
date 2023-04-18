@@ -103,13 +103,12 @@ fun Test(ss: String) {
     }
 }
 
-fun testDb()
-{
+fun testDb() {
     // Write a message to the database
     val database = Firebase.firestore
     val myRef = database.collection("test")
 
-    for (i in 0 until 100){
+    for (i in 0 until 100) {
         val user = hashMapOf(
             "first" to "Ada",
             "last" to "Lovelace",
@@ -125,6 +124,5 @@ fun testDb()
             .addOnFailureListener { e ->
                 Log.w(TAG, "Error adding document", e)
             }
-
-}
+    }
 }
