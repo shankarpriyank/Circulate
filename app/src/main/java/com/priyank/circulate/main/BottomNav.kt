@@ -1,7 +1,11 @@
 package com.priyank.circulate.main
 
 import android.content.ContentValues.TAG
+import android.net.Uri
 import android.util.Log
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.PickVisualMediaRequest
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.BadgedBox
 import androidx.compose.material.BottomNavigation
@@ -9,7 +13,7 @@ import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Button
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.Black
@@ -26,8 +30,13 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import com.priyank.circulate.authentication.model.UserInfo
+import com.priyank.circulate.main.dao.PostDao
 import com.priyank.circulate.main.model.Post
 import com.priyank.circulate.ui.theme.PrimaryOrange
+
+
+ lateinit var selectedImageUri : Uri
+
 
 @Composable
 fun BottomNavigationBar(
@@ -100,33 +109,28 @@ fun Navigation(navController: NavHostController, navControllerforSigningOut: Nav
 
 @Composable
 fun Test(ss: String) {
+
+
+    val singlePhotoPickerLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.PickVisualMedia(),
+        onResult = { uri -> selectedImageUri = uri!! }
+    )
+Column() {
     Button(onClick = { testDb() }) {
         Text(text = ss)
     }
+
+    Button(onClick = { singlePhotoPickerLauncher.launch(
+        PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+    )
+    }) {
+        Text(text = "photo")
+    }
+
+}
 }
 
 fun testDb() {
-    // Write a message to the database
-    val database = Firebase.firestore
-    val myRef = database.collection("post")
+    PostDao().uploadImage(selectedImageUri, "Hola", UserInfo("tt", "tt" ,"tt"))
 
-    for (i in 0 until 100) {
-        val user = Post(
-            createdBy = UserInfo("t000t$i", "bb", "gg"),
-            description = "Hola$i",
-            ImageUrl = "ss",
-            comments = null
-
-        )
-
-// Add a new document with a generated ID
-        myRef
-            .add(user)
-            .addOnSuccessListener { documentReference ->
-                Log.d(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
-            }
-            .addOnFailureListener { e ->
-                Log.w(TAG, "Error adding document", e)
-            }
-    }
 }
