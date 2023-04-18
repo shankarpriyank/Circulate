@@ -15,14 +15,9 @@ jobs:
     continue-on-error: true
     steps:
          
-      - name: Create file
-        run : cat /home/runner/work/Circulate/Circulate/app/google-services.json | base64
-        
-      - name : Putting Data
-        env :
-                 DATA: ${{ secrets.GOOGLE_SERVICES_JSON }}
-        run: echo $DATA > /home/runner/work/Circulate/Circulate/app/google-services.json
-      
+      - name: Create google-services.json file
+        run : echo "${{ secrets.GOOGLE_SERVICES_JSON_BASE64 }}" | base64 -d > google-services.json 
+ 
       
       - name: Checkout
         uses: actions/checkout@v2
