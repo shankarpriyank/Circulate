@@ -1,8 +1,6 @@
 package com.priyank.circulate.main
 
-import android.content.ContentValues.TAG
 import android.net.Uri
-import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -13,7 +11,7 @@ import androidx.compose.material.BottomNavigationItem
 import androidx.compose.material.Button
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color.Companion.Black
@@ -27,16 +25,12 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 import com.priyank.circulate.authentication.model.UserInfo
 import com.priyank.circulate.main.dao.PostDao
-import com.priyank.circulate.main.model.Post
+import com.priyank.circulate.main.profile.ProfileScreen
 import com.priyank.circulate.ui.theme.PrimaryOrange
 
-
- lateinit var selectedImageUri : Uri
-
+lateinit var selectedImageUri: Uri
 
 @Composable
 fun BottomNavigationBar(
@@ -102,7 +96,7 @@ fun Navigation(navController: NavHostController, navControllerforSigningOut: Nav
             Test("upload")
         }
         composable("profile") {
-            Test("profile")
+            ProfileScreen(navHostController = navControllerforSigningOut)
         }
     }
 }
@@ -110,27 +104,25 @@ fun Navigation(navController: NavHostController, navControllerforSigningOut: Nav
 @Composable
 fun Test(ss: String) {
 
-
     val singlePhotoPickerLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.PickVisualMedia(),
         onResult = { uri -> selectedImageUri = uri!! }
     )
-Column() {
-    Button(onClick = { testDb() }) {
-        Text(text = ss)
-    }
+    Column() {
+        Button(onClick = { testDb() }) {
+            Text(text = ss)
+        }
 
-    Button(onClick = { singlePhotoPickerLauncher.launch(
-        PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
-    )
-    }) {
-        Text(text = "photo")
+        Button(onClick = {
+            singlePhotoPickerLauncher.launch(
+                PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly)
+            )
+        }) {
+            Text(text = "photo")
+        }
     }
-
-}
 }
 
 fun testDb() {
-    PostDao().uploadImage(selectedImageUri, "Hola", UserInfo("tt", "tt" ,"tt"))
-
+    PostDao().uploadImage(selectedImageUri, "Hola", UserInfo("tt", "tt", "tt"))
 }
