@@ -18,7 +18,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Copy mock google_services.json
-      run: ./copy_mock_google_services_json.sh
+      run: ./mock_google_services_json.sh
 
     - name: Restore Cache
       uses: actions/cache@v2
