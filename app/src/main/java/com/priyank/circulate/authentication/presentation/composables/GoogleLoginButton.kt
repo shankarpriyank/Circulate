@@ -19,10 +19,13 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color.Companion.LightGray
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.White
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.painter.Painter
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.priyank.circulate.ui.theme.PrimaryOrange
 import com.priyank.circulate.ui.theme.Shapes
 
 @Composable
@@ -34,8 +37,8 @@ fun SignInButton(
     icon: Painter,
     isLoading: Boolean = false,
     shape: Shape = Shapes.medium,
-    borderColor: androidx.compose.ui.graphics.Color = LightGray,
-    backgroundColor: androidx.compose.ui.graphics.Color = MaterialTheme.colors.surface,
+    borderColor: androidx.compose.ui.graphics.Color = White,
+    backgroundColor: androidx.compose.ui.graphics.Color = PrimaryOrange,
     progressIndicatorColor: androidx.compose.ui.graphics.Color = MaterialTheme.colors.primary,
 
 ) {
@@ -65,12 +68,14 @@ fun SignInButton(
             horizontalArrangement = Arrangement.Center,
         ) {
             Icon(
+                modifier = Modifier.padding(end = 12.dp),
                 painter = icon,
                 contentDescription = "SignInButton",
+                tint = Color.Unspecified
             )
             Spacer(modifier = Modifier.width(8.dp))
 
-            Text(text = if (isLoading) loadingText else text)
+            Text(text = if (isLoading) loadingText else text, color = White, fontWeight = FontWeight.Bold)
             if (isLoading) {
                 Spacer(modifier = Modifier.width(16.dp))
                 CircularProgressIndicator(
