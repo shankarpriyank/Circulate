@@ -25,6 +25,8 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.priyank.circulate.authentication.model.UserInfo
+import com.priyank.circulate.main.model.Post
 import com.priyank.circulate.ui.theme.PrimaryOrange
 
 @Composable
@@ -106,13 +108,15 @@ fun Test(ss: String) {
 fun testDb() {
     // Write a message to the database
     val database = Firebase.firestore
-    val myRef = database.collection("test")
+    val myRef = database.collection("post")
 
     for (i in 0 until 100) {
-        val user = hashMapOf(
-            "first" to "Ada",
-            "last" to "Lovelace",
-            "born" to i
+        val user = Post(
+            createdBy = UserInfo("t000t$i", "bb", "gg"),
+            description = "Hola$i",
+            ImageUrl = "ss",
+            comments = null
+
         )
 
 // Add a new document with a generated ID

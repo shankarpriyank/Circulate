@@ -82,6 +82,10 @@ dependencies {
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation 'com.google.firebase:firebase-firestore-ktx'
 
+    // Add the dependency for the Cloud Storage library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-storage-ktx'
+
     //Accompanist
     implementation "com.google.accompanist:accompanist-pager:0.15.0"
     implementation "com.google.accompanist:accompanist-pager-indicators:0.15.0"
