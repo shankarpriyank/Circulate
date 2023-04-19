@@ -22,14 +22,14 @@ constructor(
 
         return listOf(
             Info(
-                "Circulate Value in your community", R.drawable.img
+                "Circulate Value in your community", R.drawable.ic2
             ),
             Info(
-                "Leverage the power of your local community", R.drawable.img_1
+                "Leverage the power of your local community", R.drawable.ic_1
             ),
             Info(
                 "Collaborate and Create \n Together and better",
-                R.drawable.img_2
+                R.drawable.ic_3
             )
 
         )

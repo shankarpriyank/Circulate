@@ -8,6 +8,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.priyank.circulate.R
 import com.priyank.circulate.authentication.data.UserDetails
+import com.priyank.circulate.main.dao.PostDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -41,5 +42,10 @@ object MainModule {
 
         // Build a GoogleSignInClient with the options specified by gso.
         return GoogleSignIn.getClient(context, gso)
+    }
+
+    @Provides
+    fun providesPostDao(): PostDao {
+        return PostDao()
     }
 }

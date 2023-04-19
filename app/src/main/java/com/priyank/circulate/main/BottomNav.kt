@@ -27,6 +27,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.priyank.circulate.authentication.model.UserInfo
 import com.priyank.circulate.main.dao.PostDao
+import com.priyank.circulate.main.feed.Feed
 import com.priyank.circulate.main.profile.ProfileScreen
 import com.priyank.circulate.ui.theme.PrimaryOrange
 
@@ -90,7 +91,7 @@ fun BottomNavigationBar(
 fun Navigation(navController: NavHostController, navControllerforSigningOut: NavHostController) {
     NavHost(navController = navController, startDestination = "home") {
         composable("home") {
-            Test("home")
+            Feed()
         }
         composable("upload") {
             Test("upload")
@@ -124,5 +125,5 @@ fun Test(ss: String) {
 }
 
 fun testDb() {
-    PostDao().uploadImage(selectedImageUri, "Hola", UserInfo("tt", "tt", "tt"))
+    PostDao().uploadPost(selectedImageUri, "Hola", UserInfo("tt", "tt", "tt"))
 }

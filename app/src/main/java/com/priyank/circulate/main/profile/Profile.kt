@@ -23,7 +23,7 @@ import androidx.navigation.NavHostController
 import com.priyank.circulate.authentication.LoginViewModel
 import com.priyank.circulate.navigation.Screen
 import com.priyank.circulate.ui.theme.Lato
-import com.priyank.circulate.ui.theme.LightGrey
+import com.priyank.circulate.ui.theme.LightOrange
 
 @Composable
 fun ProfileScreen(
@@ -43,7 +43,7 @@ fun ProfileScreen(
                 .fillMaxWidth()
                 .padding(top = 50.dp, start = 16.dp, end = 16.dp, bottom = 16.dp)
                 .background(
-                    color = LightGrey,
+                    color = LightOrange,
                     shape = RoundedCornerShape(
                         CornerSize(10.dp)
                     )
@@ -125,7 +125,7 @@ fun ProfileScreen(
                 .fillMaxWidth()
                 .padding(top = 20.dp, start = 16.dp, end = 16.dp, bottom = 80.dp)
                 .background(
-                    color = LightGrey,
+                    color = LightOrange,
                     shape = RoundedCornerShape(
                         CornerSize(10.dp)
                     )

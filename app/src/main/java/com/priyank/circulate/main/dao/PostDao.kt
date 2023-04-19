@@ -17,11 +17,11 @@ import kotlinx.coroutines.tasks.await
 class PostDao {
     val statusFlow = MutableStateFlow<UploadStatus>(UploadStatus.UpLoading())
 
-    private fun addPost(image: String, text: String, user: UserInfo) {
+    private fun addPost(image: String?, text: String, user: UserInfo) {
         val database = Firebase.firestore
         val myRef = database.collection("post")
 
-        val post = Post(user, text, image, null)
+        val post = Post(createdBy = user, description = text, imageUrl = image)
         myRef.add(post)
         GlobalScope.launch {
 
@@ -29,33 +29,41 @@ class PostDao {
         }
     }
 
-    fun uploadImage(
-        image: Uri,
+    fun uploadPost(
+        image: Uri?,
         text: String,
         user: UserInfo
     ): kotlinx.coroutines.flow.Flow<UploadStatus> {
+        if (image != null) {
 
-        val storageRef = Firebase.storage.reference
-        val photoref = storageRef.child("images/${System.currentTimeMillis()}-photo.jpg")
+            val storageRef = Firebase.storage.reference
+            val photoref = storageRef.child("images/${System.currentTimeMillis()}-photo.jpg")
 
-        photoref.putFile(image).continueWithTask { photoUploadTask ->
+            photoref.putFile(image).continueWithTask { photoUploadTask ->
 
-            Log.d("Storing Photo", "${photoUploadTask.result?.bytesTransferred}")
+                Log.d("Storing Photo", "${photoUploadTask.result?.bytesTransferred}")
 
-            photoref.downloadUrl
-        }
-            .addOnCompleteListener {
-                if (it.isSuccessful) {
-                    GlobalScope.launch {
-                        addPost(photoref.downloadUrl.await().toString(), text, user)
-                        statusFlow.emit(UploadStatus.Success())
-                    }
-                } else {
-                    GlobalScope.launch {
-                        statusFlow.emit(UploadStatus.Error())
+                photoref.downloadUrl
+            }
+                .addOnCompleteListener {
+                    if (it.isSuccessful) {
+                        GlobalScope.launch {
+                            addPost(photoref.downloadUrl.await().toString(), text, user)
+                            statusFlow.emit(UploadStatus.Success())
+                        }
+                    } else {
+                        GlobalScope.launch {
+                            statusFlow.emit(UploadStatus.Error())
+                        }
                     }
                 }
+        } else {
+            addPost(text = text, user = user, image = null)
+            GlobalScope.launch {
+                statusFlow.emit(UploadStatus.Success())
             }
+        }
+
         return statusFlow
     }
 }
