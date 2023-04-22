@@ -27,9 +27,10 @@ import com.priyank.circulate.ui.theme.LightOrange
 
 @Composable
 fun ProfileScreen(
-    viewModel: LoginViewModel = hiltViewModel(),
+    loginViewModel: LoginViewModel = hiltViewModel(),
     navHostController: NavHostController
 ) {
+
     Column(modifier = Modifier.fillMaxSize(), horizontalAlignment = Alignment.Start) {
 
         Text(
@@ -136,7 +137,7 @@ fun ProfileScreen(
                 onClick = {
                     singout(
                         navHostController = navHostController,
-                        viewModel = viewModel
+                        viewModel = loginViewModel
                     )
                 },
                 colors = ButtonDefaults.buttonColors(

@@ -10,13 +10,12 @@ import androidx.compose.runtime.Composable
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
-import com.priyank.circulate.main.upload.UploadViewModel
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun Greeting(
     navHostController: NavHostController,
-    vm: UploadViewModel = hiltViewModel()
+    vm: MainViewModel = hiltViewModel()
 ) {
     val navControllerForBottomNav = rememberNavController()
 

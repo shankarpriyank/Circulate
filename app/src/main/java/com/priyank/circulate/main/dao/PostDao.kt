@@ -16,13 +16,13 @@ import kotlinx.coroutines.tasks.await
 
 class PostDao {
     val statusFlow = MutableStateFlow<UploadStatus>(UploadStatus.UpLoading())
+    val database = Firebase.firestore
+    val postCollection = database.collection("post")
 
     private fun addPost(image: String?, text: String, user: UserInfo) {
-        val database = Firebase.firestore
-        val myRef = database.collection("post")
 
         val post = Post(createdBy = user, description = text, imageUrl = image)
-        myRef.add(post)
+        postCollection.add(post)
         GlobalScope.launch {
 
             statusFlow.emit(UploadStatus.Success())
@@ -65,5 +65,24 @@ class PostDao {
         }
 
         return statusFlow
+    }
+
+    suspend fun getAllPosts(): List<Post> {
+
+        val postList = postCollection.get().await().toObjects(Post::class.java)
+
+        postCollection.addSnapshotListener { snapshot, error ->
+            if (snapshot == null || error != null) {
+                Log.e("FireStore ERR", "$error")
+                return@addSnapshotListener
+            } else {
+                val postlist = snapshot.toObjects(Post::class.java)
+                for (post in postlist) {
+                    Log.i("Info", "$post")
+                }
+            }
+        }
+
+        return postList
     }
 }
