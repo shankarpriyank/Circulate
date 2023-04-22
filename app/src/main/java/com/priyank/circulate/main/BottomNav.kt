@@ -29,6 +29,7 @@ import com.priyank.circulate.authentication.model.UserInfo
 import com.priyank.circulate.main.dao.PostDao
 import com.priyank.circulate.main.feed.Feed
 import com.priyank.circulate.main.profile.ProfileScreen
+import com.priyank.circulate.main.upload.UploadScreen
 import com.priyank.circulate.ui.theme.PrimaryOrange
 
 lateinit var selectedImageUri: Uri
@@ -94,7 +95,7 @@ fun Navigation(navController: NavHostController, navControllerforSigningOut: Nav
             Feed()
         }
         composable("upload") {
-            Test("upload")
+            UploadScreen()
         }
         composable("profile") {
             ProfileScreen(navHostController = navControllerforSigningOut)

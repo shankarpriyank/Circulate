@@ -3,17 +3,20 @@ package com.priyank.circulate.main
 import android.annotation.SuppressLint
 import androidx.compose.material.Scaffold
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.Camera
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material.icons.outlined.PostAdd
 import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.priyank.circulate.main.upload.UploadViewModel
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun Greeting(
-    navHostController: NavHostController
+    navHostController: NavHostController,
+    vm: UploadViewModel = hiltViewModel()
 ) {
     val navControllerForBottomNav = rememberNavController()
 
@@ -29,7 +32,7 @@ fun Greeting(
                     BottomNavItem(
                         name = "Upload",
                         route = "upload",
-                        icon = Icons.Outlined.Camera
+                        icon = Icons.Outlined.PostAdd
                     ),
 
                     BottomNavItem(
@@ -45,6 +48,9 @@ fun Greeting(
             )
         }
     ) {
-        Navigation(navController = navControllerForBottomNav, navControllerforSigningOut = navHostController)
+        Navigation(
+            navController = navControllerForBottomNav,
+            navControllerforSigningOut = navHostController
+        )
     }
 }
