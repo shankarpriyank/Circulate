@@ -59,7 +59,7 @@ fun PostItem(
                             .size(28.dp)
                             .clip(CircleShape)
                             .border(1.dp, Color.White, CircleShape),
-                        model = imageUrl,
+                        model = profileImageUrl,
                         contentDescription = "N/A"
                     )
                     Text(
@@ -78,7 +78,7 @@ fun PostItem(
                         .fillMaxWidth()
                         .heightIn(min = 200.dp)
                         .clip(RoundedCornerShape(0)),
-                    model = profileImageUrl, contentDescription = "postImage",
+                    model = imageUrl, contentDescription = "postImage",
                     error = painterResource(
                         id = R.drawable.error_place
                     )
