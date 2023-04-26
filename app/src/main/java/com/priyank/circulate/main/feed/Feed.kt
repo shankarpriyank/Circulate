@@ -19,7 +19,7 @@ import com.priyank.circulate.ui.theme.LightGrey
 fun Feed(vm: MainViewModel = hiltViewModel()) {
 
     Column(
-        modifier = Modifier.padding(bottom = 20.dp)
+        modifier = Modifier.padding(bottom = 52.dp)
             .verticalScroll(rememberScrollState())
             .background(color = LightGrey)
     ) {
