@@ -45,6 +45,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import coil.compose.AsyncImage
 import com.priyank.circulate.R
+import com.priyank.circulate.UpdateNotificationService
 import com.priyank.circulate.main.MainViewModel
 import com.priyank.circulate.ui.theme.Lato
 import com.priyank.circulate.ui.theme.PrimaryOrange
@@ -55,7 +56,7 @@ import kotlinx.coroutines.launch
 @Composable
 fun UploadScreen(uploadViewModel: MainViewModel = hiltViewModel()) {
     val context = LocalContext.current.applicationContext
-
+    val service = UpdateNotificationService(context)
     var selectedImageUri by remember {
         mutableStateOf<Uri?>(null)
     }
@@ -71,6 +72,9 @@ fun UploadScreen(uploadViewModel: MainViewModel = hiltViewModel()) {
             when (event) {
                 is MainViewModel.UIEvent.ShowToast -> {
                     Toast.makeText(context, event.message, Toast.LENGTH_LONG).show()
+                }
+                is MainViewModel.UIEvent.ShowNotification -> {
+                    service.showNotification(event.message)
                 }
             }
         }

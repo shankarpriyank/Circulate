@@ -31,6 +31,7 @@ fun Feed(vm: MainViewModel = hiltViewModel()) {
 
         for (post in posts) {
             PostItem(
+                contactEmail = post.createdBy!!.email!!,
                 profileImageUrl = post.createdBy!!.profilePhotoUrl!!,
                 createdBy = post.createdBy.name!!,
                 description = post.description!!,

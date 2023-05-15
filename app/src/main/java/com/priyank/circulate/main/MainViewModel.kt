@@ -9,6 +9,7 @@ import com.priyank.circulate.main.model.UploadStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
@@ -38,7 +39,7 @@ class MainViewModel @Inject constructor(
         if (desc == "" || desc == null) {
             _eventFlow.emit(UIEvent.ShowToast("Description Can't Be Empty"))
         } else {
-            _eventFlow.emit(UIEvent.ShowToast("Upload Started"))
+            _eventFlow.emit(UIEvent.ShowNotification("Upload Started"))
 
             postDao.uploadPost(image, desc, user).onEach { result ->
 
@@ -47,9 +48,12 @@ class MainViewModel @Inject constructor(
                     is UploadStatus.UpLoading -> {
                     }
                     is UploadStatus.Success -> {
+                        delay(3000)
+                        _eventFlow.emit(UIEvent.ShowNotification("Upload Complete"))
                     }
 
                     is UploadStatus.Error -> {
+                        _eventFlow.emit(UIEvent.ShowNotification("Upload Failed"))
                     }
                 }
             }.collect()
@@ -66,5 +70,6 @@ class MainViewModel @Inject constructor(
 
     sealed class UIEvent {
         data class ShowToast(val message: String) : UIEvent()
+        data class ShowNotification(val message: String) : UIEvent()
     }
 }

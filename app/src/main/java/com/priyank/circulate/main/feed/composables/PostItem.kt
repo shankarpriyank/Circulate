@@ -1,6 +1,9 @@
 package com.priyank.circulate.main.feed.composables
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.border
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -16,12 +19,15 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat.startActivity
 import coil.compose.AsyncImage
 import com.priyank.circulate.R
 import com.priyank.circulate.main.model.Comment
@@ -29,6 +35,7 @@ import com.priyank.circulate.ui.theme.Lato
 
 @Composable
 fun PostItem(
+    contactEmail: String,
     profileImageUrl: String,
     createdBy: String,
     description: String,
@@ -37,11 +44,23 @@ fun PostItem(
     comments: List<Comment>?,
     upVotes: Long = 0
 ) {
+    val context = LocalContext.current
     Card(
         modifier = Modifier
             .fillMaxWidth()
             .padding(8.dp)
-            .clip(RoundedCornerShape(4)),
+            .clip(RoundedCornerShape(4))
+            .pointerInput(Unit) {
+                detectTapGestures(
+                    onLongPress = {
+                        val intent = Intent(Intent.ACTION_SENDTO)
+                        intent.data =
+                            Uri.parse("mailto:$contactEmail") // only email apps should handle this
+
+                        startActivity(context, intent, null)
+                    }
+                )
+            },
         elevation = 8.dp, shape = RoundedCornerShape(4), backgroundColor = Color.White
     ) {
         if (imageUrl != null) {
@@ -84,7 +103,13 @@ fun PostItem(
                     )
                 )
 
-                Text(color = Color.Black, fontWeight = FontWeight.Bold, text = description, modifier = Modifier.padding(start = 4.dp), fontFamily = Lato)
+                Text(
+                    color = Color.Black,
+                    fontWeight = FontWeight.Bold,
+                    text = description,
+                    modifier = Modifier.padding(start = 4.dp),
+                    fontFamily = Lato
+                )
             }
         } else {
             Column(modifier = Modifier, horizontalAlignment = Alignment.CenterHorizontally) {
@@ -111,7 +136,16 @@ fun PostItem(
                     )
                 }
 
-                Text(color = Color.Black, fontWeight = FontWeight.Bold, text = description, modifier = Modifier.padding(start = 4.dp, bottom = 16.dp, top = 8.dp).heightIn(100.dp), fontFamily = Lato, textAlign = TextAlign.Justify)
+                Text(
+                    color = Color.Black,
+                    fontWeight = FontWeight.Bold,
+                    text = description,
+                    modifier = Modifier
+                        .padding(start = 4.dp, bottom = 16.dp, top = 8.dp)
+                        .heightIn(100.dp),
+                    fontFamily = Lato,
+                    textAlign = TextAlign.Justify
+                )
             }
         }
     }
