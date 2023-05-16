@@ -65,6 +65,16 @@ dependencies {
     androidTestImplementation "androidx.compose.ui:ui-test-junit4:$compose_ui_version"
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_ui_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_ui_version"
+    testImplementation 'io.mockk:mockk:1.13.2'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.4'
+    testImplementation 'com.google.dagger:hilt-android-testing:2.44'
+    kaptTest("com.google.dagger:hilt-android-compiler:2.44")
+    testImplementation 'org.mockito:mockito-core:3.12.4'
+    testImplementation 'org.mockito:mockito-inline:3.12.4'
+    testImplementation 'io.mockk:mockk:1.13.2'
+
+
 
     //Authentication
     implementation 'com.google.android.gms:play-services-auth:20.5.0'

@@ -1,6 +1,5 @@
 package com.priyank.circulate
 
-import android.util.Log
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
@@ -28,10 +27,10 @@ constructor(
         viewModelScope.launch {
             val isUserLoggedIn = userDetails.isLoggedIn()
             if (isUserLoggedIn) {
-                Log.i("Is user signed in", isUserLoggedIn.toString())
+                //   Log.i("Is user signed in", isUserLoggedIn.toString())
                 _startDestination.value = Screen.Main.route
             } else {
-                Log.i("Is user signed in", isUserLoggedIn.toString())
+                //  Log.i("Is user signed in", isUserLoggedIn.toString())
                 _startDestination.value = Screen.Authentication.route
             }
             _showSplashScreen.emit(false)
